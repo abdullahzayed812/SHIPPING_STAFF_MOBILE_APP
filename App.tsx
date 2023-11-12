@@ -13,6 +13,8 @@ import { IMAGES } from "./src/utils/images";
 import { COLORS } from "./src/utils/colors";
 import { SplashScreen } from "./src/screens/SplashScreen";
 import { HomeScreen } from "./src/screens/HomeScreen";
+import { ScanShipmentScreen } from "./src/screens/ScanShipmentsScreen";
+import { ShipmentDetailsScreen } from "./src/screens/ShipmentDetailsScreen";
 
 // type SectionProps = PropsWithChildren<{
 //   title: string;
@@ -27,7 +29,7 @@ function App(): JSX.Element {
         // barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={COLORS.MAIN}
       />
-      <HomeScreen />
+      <ShipmentDetailsScreen />
     </SafeAreaView>
   );
 }

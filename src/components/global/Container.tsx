@@ -8,12 +8,14 @@ import { SPACING } from "../../utils/dimensions";
 interface Props extends PropsWithChildren {
   changeDefaultBg?: boolean;
   centerContent?: boolean;
+  spaceBetween?: boolean;
 }
 
 export const Container: React.FC<Props> = ({
   children,
   changeDefaultBg,
   centerContent,
+  spaceBetween,
 }) => {
   const CENTER = centerContent ? GLOBAL_STYLES.CENTER : null;
 
@@ -26,6 +28,7 @@ export const Container: React.FC<Props> = ({
           backgroundColor: changeDefaultBg ? COLORS.MAIN : COLORS.WHITE,
         },
         centerContent ? CENTER : null,
+        spaceBetween ? { justifyContent: "space-between" } : null,
       ]}>
       {children}
     </View>
