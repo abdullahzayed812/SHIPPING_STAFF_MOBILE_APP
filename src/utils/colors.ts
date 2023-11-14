@@ -6,4 +6,5 @@ export const COLORS = {
   WHITE: "#fff",
   GRAY: "#DDD",
   LIGHT_GRAY: "#F6F6F6",
+  GRAY_OVERLAY: "rgba(0, 0, 0, 0.3)",
 };

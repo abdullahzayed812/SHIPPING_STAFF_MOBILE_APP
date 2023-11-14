@@ -7,4 +7,13 @@ export const IMAGES = {
   ARROW: require("../assets/images/arrow.png"),
   DETAILS: require("../assets/images/details.png"),
   EDIT: require("../assets/images/edit.png"),
+  TRUE: require("../assets/images/true.png"),
+  AVATAR1: require("../assets/images/avatar1.png"),
+  LANGUAGE: require("../assets/images/language.png"),
+  LOGOUT: require("../assets/images/logout.png"),
+  SMALL_ARROW: require("../assets/images/smallArrow.png"),
+  PROFILE: require("../assets/images/profile.png"),
+  LOCK: require("../assets/images/lock.png"),
+  CHANGE_PASSWORD: require("../assets/images/changePass.png"),
+  CROSS: require("../assets/images/cross.png"),
 };

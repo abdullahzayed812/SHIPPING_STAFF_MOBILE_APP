@@ -9,9 +9,16 @@ interface ButtonProps {
   onPress: () => void;
   containerStyle?: ViewStyle;
   color?: ColorValue;
+  fontSize?: number;
 }
 
-export function Button({ text, onPress, containerStyle, color }: ButtonProps): JSX.Element {
+export function Button({
+  text,
+  onPress,
+  containerStyle,
+  color,
+  fontSize,
+}: ButtonProps): JSX.Element {
   return (
     <TouchableOpacity style={[STYLES.container, containerStyle]} onPress={onPress}>
       <Text style={[STYLES.text, { color }]}>{text}</Text>

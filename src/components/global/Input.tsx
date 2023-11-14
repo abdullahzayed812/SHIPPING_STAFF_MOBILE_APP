@@ -1,15 +1,19 @@
-import { StyleSheet, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View, ViewStyle } from "react-native";
 import { COLORS } from "../../utils/colors";
 import { SPACING } from "../../utils/dimensions";
 
 interface InputProps {
   placeholder: string;
+  numeric?: boolean;
+  inputContainerStyle?: ViewStyle;
 }
 
-export function Input({ placeholder }: InputProps): JSX.Element {
+export function Input({ placeholder, numeric, inputContainerStyle }: InputProps): JSX.Element {
+  const KEYBOARD_TYPE = numeric ? "numeric" : undefined;
+
   return (
-    <View style={STYLES.container}>
-      <TextInput style={STYLES.input} placeholder={placeholder} />
+    <View style={[STYLES.container, inputContainerStyle]}>
+      <TextInput style={STYLES.input} placeholder={placeholder} keyboardType={KEYBOARD_TYPE} />
     </View>
   );
 }
