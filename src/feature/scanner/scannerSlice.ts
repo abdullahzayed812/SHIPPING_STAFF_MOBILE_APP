@@ -3,13 +3,13 @@ import type { RootState } from "../../app/store";
 
 // Define a type for the slice state
 export interface ScannerState {
-  isVisible: boolean;
+  isActive: boolean;
   scannedValue: string;
 }
 
 // Define the initial state using that type
 const initialState: ScannerState = {
-  isVisible: true,
+  isActive: true,
   scannedValue: "",
 };
 
@@ -19,10 +19,10 @@ export const scannerSlice = createSlice({
   initialState,
   reducers: {
     openScanner: (state) => {
-      state.isVisible = true;
+      state.isActive = true;
     },
     closeScanner: (state) => {
-      state.isVisible = false;
+      state.isActive = false;
     },
   },
 });
@@ -30,6 +30,6 @@ export const scannerSlice = createSlice({
 export const { openScanner, closeScanner } = scannerSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectScannerVisibility = (state: RootState) => state.scanner.isVisible;
+export const selectScannerVisibility = (state: RootState) => state.scanner.isActive;
 
 export default scannerSlice.reducer;

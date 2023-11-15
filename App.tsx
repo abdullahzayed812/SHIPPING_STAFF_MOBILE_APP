@@ -25,6 +25,7 @@ import { store } from "./src/app/store";
 import { Button } from "./src/components/global/Button";
 import { openScanner } from "./src/feature/scanner/scannerSlice";
 import { useAppDispatch } from "./src/app/hooks";
+import { RootStackScreen } from "./src/navigations";
 
 // type SectionProps = PropsWithChildren<{
 //   title: string;
@@ -41,8 +42,10 @@ function App(): JSX.Element {
         backgroundColor={COLORS.MAIN}
       />
       <Provider store={store}>
-        <Scanner />
+        {/* <Scanner />
         <Button text="Open" onPress={() => store.dispatch(openScanner())} />
+         */}
+        <RootStackScreen />
       </Provider>
     </SafeAreaView>
   );

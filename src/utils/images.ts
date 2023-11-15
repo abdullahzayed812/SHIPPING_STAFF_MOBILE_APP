@@ -16,4 +16,7 @@ export const IMAGES = {
   LOCK: require("../assets/images/lock.png"),
   CHANGE_PASSWORD: require("../assets/images/changePass.png"),
   CROSS: require("../assets/images/cross.png"),
+  USER: require("../assets/images/user.png"),
+  HOME: require("../assets/images/home.png"),
+  SCAN_SHIPMENT: require("../assets/images/scanShip.png"),
 };
