@@ -1,11 +1,25 @@
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Container } from "../components/global/Container";
 import { ScanBox } from "../components/home/ScanBox";
 import { UserInfo } from "../components/home/UserInfo";
 import { COLORS } from "../utils/colors";
 import { SPACING } from "../utils/dimensions";
 import { IMAGES } from "../utils/images";
+import { HomeStackParamList, RootStackParamList } from "../navigations/types";
+import { useAppDispatch } from "../app/hooks";
+import { openScanner } from "../feature/scanner/scannerSlice";
 
-export function HomeScreen(): JSX.Element {
+interface HomeScreenProps {
+  navigation: NativeStackNavigationProp<HomeStackParamList>;
+}
+
+export function HomeScreen({ navigation }: HomeScreenProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const navigateToScannerInput = () => {
+    navigation.navigate("ScanShipmentScreen");
+  };
+
   return (
     <Container>
       <UserInfo />
@@ -15,6 +29,7 @@ export function HomeScreen(): JSX.Element {
         text={"Scan Shipment\nBy Scanner"}
         flexDirection="row-reverse"
         color={COLORS.WHITE}
+        handlePress={navigateToScannerInput}
       />
       <ScanBox
         image={IMAGES.SCAN3}
@@ -24,6 +39,7 @@ export function HomeScreen(): JSX.Element {
           width: SPACING.SCAN2_IMAGE_HEIGHT,
           height: SPACING.SCAN2_IMAGE_HEIGHT,
         }}
+        handlePress={() => dispatch(openScanner())}
       />
       <ScanBox
         image={IMAGES.SCAN2}
@@ -34,6 +50,7 @@ export function HomeScreen(): JSX.Element {
           width: SPACING.SCAN3_IMAGE_HEIGHT,
           height: SPACING.SCAN3_IMAGE_HEIGHT,
         }}
+        handlePress={navigateToScannerInput}
       />
     </Container>
   );

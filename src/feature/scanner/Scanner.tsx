@@ -12,8 +12,14 @@ import {
   useCodeScanner,
 } from "react-native-vision-camera";
 import { SPACING } from "../../utils/dimensions";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../navigations/types";
 
-export function Scanner(): JSX.Element {
+interface ScannerProps {
+  navigation: NativeStackNavigationProp<RootStackParamList>;
+}
+
+export function Scanner({ navigation }: ScannerProps): JSX.Element {
   const { hasPermission, requestPermission } = useCameraPermission();
   const device = useCameraDevice("back");
 
@@ -36,14 +42,19 @@ export function Scanner(): JSX.Element {
     },
   });
 
+  const handleCloseScanner = () => {
+    dispatch(closeScanner());
+    navigation.goBack();
+  };
+
   return (
     <Modal visible={isActive} transparent animationType="slide">
       <View style={STYLES.container}>
-        <TouchableOpacity onPress={() => dispatch(closeScanner())}>
+        <TouchableOpacity onPress={handleCloseScanner}>
           <Image source={IMAGES.CROSS} style={STYLES.closeImage} />
         </TouchableOpacity>
 
-        {hasPermission ? (
+        {hasPermission && isActive ? (
           <Camera
             style={STYLES.camera}
             device={device}

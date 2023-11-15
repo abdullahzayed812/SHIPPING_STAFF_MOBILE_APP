@@ -16,14 +16,10 @@ interface ScanBoxProps {
   image: ImageSourcePropType;
   text: string;
   backgroundColor: ColorValue;
-  flexDirection?:
-    | "row"
-    | "column"
-    | "row-reverse"
-    | "column-reverse"
-    | undefined;
+  flexDirection?: "row" | "column" | "row-reverse" | "column-reverse" | undefined;
   color?: ColorValue;
   imageSize?: ImageStyle;
+  handlePress: () => void;
 }
 
 export function ScanBox({
@@ -33,6 +29,7 @@ export function ScanBox({
   flexDirection,
   color,
   imageSize,
+  handlePress,
 }: ScanBoxProps): JSX.Element {
   return (
     <TouchableOpacity
@@ -42,7 +39,8 @@ export function ScanBox({
           backgroundColor,
           flexDirection: flexDirection ? flexDirection : "row",
         },
-      ]}>
+      ]}
+      onPress={handlePress}>
       <Text style={[STYLES.text, { color }]}>{text}</Text>
       <Image source={image} style={[STYLES.image, imageSize]} />
     </TouchableOpacity>

@@ -21,7 +21,7 @@ const { width } = Dimensions.get("window");
 export function TabBar({ state, navigation, descriptors }: TabBarProps) {
   return (
     <View style={STYLES.container}>
-      {/* {state.routes.map((route, index) => {
+      {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
           options.tabBarLabel !== undefined
@@ -65,7 +65,7 @@ export function TabBar({ state, navigation, descriptors }: TabBarProps) {
             </Text>
           </TouchableOpacity>
         );
-      })} */}
+      })}
     </View>
   );
 }

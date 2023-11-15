@@ -19,4 +19,5 @@ export const IMAGES = {
   USER: require("../assets/images/user.png"),
   HOME: require("../assets/images/home.png"),
   SCAN_SHIPMENT: require("../assets/images/scanShip.png"),
+  BOX: require("../assets/images/box.png"),
 };
