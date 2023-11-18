@@ -6,14 +6,28 @@ interface InputProps {
   placeholder: string;
   numeric?: boolean;
   inputContainerStyle?: ViewStyle;
+  handleChange(text: string): void;
+  secureTextEntry?: boolean;
 }
 
-export function Input({ placeholder, numeric, inputContainerStyle }: InputProps): JSX.Element {
+export function Input({
+  placeholder,
+  numeric,
+  inputContainerStyle,
+  handleChange,
+  secureTextEntry,
+}: InputProps): JSX.Element {
   const KEYBOARD_TYPE = numeric ? "numeric" : undefined;
 
   return (
     <View style={[STYLES.container, inputContainerStyle]}>
-      <TextInput style={STYLES.input} placeholder={placeholder} keyboardType={KEYBOARD_TYPE} />
+      <TextInput
+        style={STYLES.input}
+        placeholder={placeholder}
+        keyboardType={KEYBOARD_TYPE}
+        onChangeText={(text) => handleChange(text)}
+        secureTextEntry={secureTextEntry}
+      />
     </View>
   );
 }

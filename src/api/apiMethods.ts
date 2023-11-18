@@ -1,6 +1,6 @@
 import { store } from "../app/store";
 
-const BASE_URL = "";
+const BASE_URL = "https://postagexp.com/staff/app/api/v1";
 
 function getToken() {}
 
@@ -16,7 +16,7 @@ function getHeaders(): { [index: string]: string } {
   };
 }
 
-export class ApiMethods {
+export class ApiMethod {
   static async apiRequest<T>(method: string, URL: string, body?: T): Promise<void> {
     const url = BASE_URL + URL;
     try {
@@ -25,7 +25,7 @@ export class ApiMethods {
         body: JSON.stringify(body),
         headers: getHeaders(),
       });
-      const data = response.json();
+      const data = await response.json();
       return data;
     } catch (error) {
       console.log(error);

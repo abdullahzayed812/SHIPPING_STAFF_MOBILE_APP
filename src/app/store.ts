@@ -1,9 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import scannerReducer from "../feature/scanner/scannerSlice";
+import userReducer from "../feature/user/userSlice";
+import notificationReducer from "../feature/notification/notificationSlice";
 
 export const store = configureStore({
   reducer: {
     scanner: scannerReducer,
+    user: userReducer,
+    notification: notificationReducer,
   },
 });
 

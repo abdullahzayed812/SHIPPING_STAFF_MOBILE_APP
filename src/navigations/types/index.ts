@@ -14,4 +14,5 @@ export type HomeStackParamList = {
 export type RootStackParamList = {
   TabStackScreen: NavigatorScreenParams<TabStackParamList>;
   SplashScreen: undefined;
+  LoginScreen: undefined;
 };
