@@ -5,19 +5,24 @@ import { UserInfo } from "../components/home/UserInfo";
 import { COLORS } from "../utils/colors";
 import { SPACING } from "../utils/dimensions";
 import { IMAGES } from "../utils/images";
-import { HomeStackParamList, RootStackParamList } from "../navigations/types";
+import { HomeStackParamList, RootStackParamList, TabStackParamList } from "../navigations/types";
 import { useAppDispatch } from "../app/hooks";
 import { openScanner } from "../feature/scanner/scannerSlice";
 
 interface HomeScreenProps {
-  navigation: NativeStackNavigationProp<HomeStackParamList>;
+  navigation: NativeStackNavigationProp<TabStackParamList>;
 }
 
 export function HomeScreen({ navigation }: HomeScreenProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const navigateToScannerInput = () => {
-    navigation.navigate("ScanShipmentScreen");
+    navigation.navigate("Home", { screen: "ScanShipmentScreen" });
+  };
+
+  const navigateToScannerCamera = () => {
+    navigation.navigate("Scan");
+    dispatch(openScanner());
   };
 
   return (
@@ -39,7 +44,7 @@ export function HomeScreen({ navigation }: HomeScreenProps): JSX.Element {
           width: SPACING.SCAN2_IMAGE_HEIGHT,
           height: SPACING.SCAN2_IMAGE_HEIGHT,
         }}
-        handlePress={() => dispatch(openScanner())}
+        handlePress={navigateToScannerCamera}
       />
       <ScanBox
         image={IMAGES.SCAN2}

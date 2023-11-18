@@ -1,7 +1,7 @@
 import { NavigatorScreenParams } from "@react-navigation/native";
 
 export type TabStackParamList = {
-  Home: undefined;
+  Home: NavigatorScreenParams<HomeStackParamList>;
   Scan: undefined;
   Profile: undefined;
 };
