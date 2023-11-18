@@ -1,14 +1,15 @@
 import { NavigatorScreenParams } from "@react-navigation/native";
 
 export type TabStackParamList = {
-  Home: NavigatorScreenParams<HomeStackParamList>;
-  Scan: undefined;
-  Profile: undefined;
+  HomeScreen: undefined;
+  ScanStackScreen: NavigatorScreenParams<ScanStackParamList>;
+  ProfileScreen: undefined;
 };
 
-export type HomeStackParamList = {
-  HomeScreen: undefined;
+export type ScanStackParamList = {
+  ScannerScreen: undefined;
   ScanShipmentScreen: undefined;
+  ShipmentDetailsScreen: { awb: string };
 };
 
 export type RootStackParamList = {

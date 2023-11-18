@@ -3,7 +3,12 @@ import { IMAGES } from "../../utils/images";
 import { COLORS } from "../../utils/colors";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { closeScanner, selectScannerVisibility } from "./scannerSlice";
+import {
+  closeScanner,
+  closeScannerModal,
+  selectScannerModalVisibility,
+  selectScannerVisibility,
+} from "./scannerSlice";
 import {
   Camera,
   Code,
@@ -11,61 +16,60 @@ import {
   useCameraPermission,
   useCodeScanner,
 } from "react-native-vision-camera";
-import { SPACING } from "../../utils/dimensions";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../navigations/types";
+import { ScanStackParamList } from "../../navigations/types";
 
 interface ScannerProps {
-  navigation: NativeStackNavigationProp<RootStackParamList>;
+  navigation: NativeStackNavigationProp<ScanStackParamList>;
 }
 
 export function Scanner({ navigation }: ScannerProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const isActiveCamera = useAppSelector(selectScannerVisibility);
+  const isActiveModal = useAppSelector(selectScannerModalVisibility);
+
   const { hasPermission, requestPermission } = useCameraPermission();
   const device = useCameraDevice("back");
 
   if (device == null) return <Text>No camera device found.</Text>;
 
-  const [scannedValue, setScannedValue] = useState<Code[]>();
+  const [scannedValue, setScannedValue] = useState<string>();
 
   useEffect(() => {
     requestPermission();
   }, []);
 
-  const dispatch = useAppDispatch();
-  const isActive = useAppSelector(selectScannerVisibility);
-
   const codeScanner = useCodeScanner({
     codeTypes: ["qr", "ean-13"],
     onCodeScanned: (codes: Code[]) => {
-      setScannedValue(codes);
-      console.log(`Scanned ${codes.length} codes!`);
+      setScannedValue(codes[0].value);
+      dispatch(closeScanner());
+      dispatch(closeScannerModal());
+      navigation.navigate("ShipmentDetailsScreen", { awb: scannedValue! });
     },
   });
 
   const handleCloseScanner = () => {
+    dispatch(closeScannerModal());
     dispatch(closeScanner());
     navigation.goBack();
   };
 
   return (
-    <Modal visible={isActive} transparent animationType="slide">
+    <Modal visible={isActiveModal} transparent animationType="slide">
       <View style={STYLES.container}>
         <TouchableOpacity onPress={handleCloseScanner}>
           <Image source={IMAGES.CROSS} style={STYLES.closeImage} />
         </TouchableOpacity>
 
-        {hasPermission && isActive ? (
+        {hasPermission && isActiveCamera ? (
           <Camera
             style={STYLES.camera}
             device={device}
-            isActive={isActive}
+            isActive={isActiveCamera}
             codeScanner={codeScanner}
           />
         ) : null}
-
-        {scannedValue?.map((code) => (
-          <Text>{code.value}</Text>
-        ))}
       </View>
     </Modal>
   );

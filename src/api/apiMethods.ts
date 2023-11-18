@@ -32,8 +32,8 @@ export class ApiMethod {
     }
   }
 
-  static async get(url: string): Promise<void> {
-    return this.apiRequest("GET", url);
+  static async get(url: string, data?: any): Promise<void> {
+    return this.apiRequest("GET", url, data);
   }
 
   static async post<T>(url: string, data: T): Promise<void> {
