@@ -13,15 +13,15 @@ interface ScanTabProps {
 export function TabBarIcon({ routeName, focused, size }: ScanTabProps) {
   let iconName;
 
-  if (routeName === "Home") {
+  if (routeName === "HomeScreen") {
     iconName = focused ? IMAGES.HOME : IMAGES.HOME;
-  } else if (routeName === "Scan") {
+  } else if (routeName === "ScanStackScreen") {
     iconName = focused ? IMAGES.SCAN_SHIPMENT : IMAGES.SCAN_SHIPMENT;
-  } else if (routeName === "Profile") {
+  } else if (routeName === "ProfileStackScreen") {
     iconName = focused ? IMAGES.PROFILE : IMAGES.PROFILE;
   }
 
-  return routeName === "Scan" ? (
+  return routeName === "ScanStackScreen" ? (
     <View style={STYLES.container}>
       <Image source={iconName} style={STYLES.scanTab} />
     </View>

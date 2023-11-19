@@ -17,10 +17,13 @@ import {
   useCodeScanner,
 } from "react-native-vision-camera";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { ScanStackParamList } from "../../navigations/types";
+import { RootStackParamList } from "../../navigations/types";
+import { ShipmentDetailsType } from "../../components/shipmentDetails/ShipmentDetails";
+import { ApiManager } from "../../api/apiManager";
+import { Loading } from "../../components/global/Loading";
 
 interface ScannerProps {
-  navigation: NativeStackNavigationProp<ScanStackParamList>;
+  navigation: NativeStackNavigationProp<RootStackParamList>;
 }
 
 export function Scanner({ navigation }: ScannerProps): JSX.Element {
@@ -33,19 +36,38 @@ export function Scanner({ navigation }: ScannerProps): JSX.Element {
 
   if (device == null) return <Text>No camera device found.</Text>;
 
-  const [scannedValue, setScannedValue] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     requestPermission();
   }, []);
 
+  const getShipmentDetails = async (awb: string | undefined) => {
+    if (awb!.length > 14) {
+      try {
+        setLoading(true);
+
+        const res = await ApiManager.getShipmentDetails(awb!);
+
+        if (res?.data?.awb) {
+          navigation.navigate("ShipmentStackScreen", {
+            screen: "ShipmentDetailsScreen",
+            params: res?.data,
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
   const codeScanner = useCodeScanner({
     codeTypes: ["qr", "ean-13"],
     onCodeScanned: (codes: Code[]) => {
-      setScannedValue(codes[0].value);
       dispatch(closeScanner());
-      dispatch(closeScannerModal());
-      navigation.navigate("ShipmentDetailsScreen", { awb: scannedValue! });
+      getShipmentDetails(codes[0].value);
     },
   });
 
@@ -71,6 +93,7 @@ export function Scanner({ navigation }: ScannerProps): JSX.Element {
           />
         ) : null}
       </View>
+      {loading ? <Loading /> : null}
     </Modal>
   );
 }

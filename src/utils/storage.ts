@@ -10,14 +10,19 @@ export async function storeUserData(accessToken: string, userInfo: UserInfo): Pr
   }
 }
 
-export async function loadUserData(): Promise<
-  { accessToken: string; userInfo: UserInfo } | undefined
-> {
+export async function loadUserData(): Promise<UserInfo | undefined> {
   try {
-    const accessToken = await AsyncStorage.getItem("token");
     const userInfo = await AsyncStorage.getItem("userInfo");
+    return userInfo !== null ? JSON.parse(userInfo) : undefined;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-    return accessToken && userInfo ? { accessToken, userInfo: JSON.parse(userInfo) } : undefined;
+export async function loadToken(): Promise<string | undefined> {
+  try {
+    const token = await AsyncStorage.getItem("token");
+    return token !== null ? token : undefined;
   } catch (error) {
     console.log(error);
   }

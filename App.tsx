@@ -6,7 +6,7 @@
  */
 
 import React from "react";
-import { Image, SafeAreaView, StatusBar, StyleSheet, View } from "react-native";
+import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
 import { COLORS } from "./src/utils/colors";
 import { Provider } from "react-redux";
 import { store } from "./src/app/store";

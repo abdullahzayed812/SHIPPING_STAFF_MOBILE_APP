@@ -8,10 +8,9 @@ const ScanStack = createNativeStackNavigator<ScanStackParamList>();
 
 export function ScanShipmentStackScreen(): JSX.Element {
   return (
-    <ScanStack.Navigator>
+    <ScanStack.Navigator initialRouteName="ScannerScreen" screenOptions={{ headerShown: false }}>
       <ScanStack.Screen name="ScannerScreen" component={Scanner} />
       <ScanStack.Screen name="ScanShipmentScreen" component={ScanShipmentScreen} />
-      <ScanStack.Screen name="ShipmentDetailsScreen" component={ShipmentDetailsScreen} />
     </ScanStack.Navigator>
   );
 }

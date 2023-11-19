@@ -61,10 +61,10 @@ export function LoginForm(): JSX.Element {
 
       const { access_token, user } = await ApiManager.login<FormInputType>({ email, password });
 
-      if (user.id) {
+      if (user?.id) {
         await storeUserData(access_token, user);
         dispatch(saveUserData({ access_token, user }));
-        navigation.navigate("TabStackScreen", { screen: "Home" });
+        navigation.navigate("TabStackScreen", { screen: "HomeScreen" });
       } else {
         displayError(setError, "User not found.");
       }
@@ -81,12 +81,14 @@ export function LoginForm(): JSX.Element {
         placeholder="Email"
         inputContainerStyle={STYLES.input}
         handleChange={(text: string) => handleInputChange(text, "email")}
+        value={email}
       />
       <Input
         secureTextEntry
         placeholder="Password"
         inputContainerStyle={STYLES.input}
         handleChange={(text: string) => handleInputChange(text, "password")}
+        value={password}
       />
       <Button
         text="Login"

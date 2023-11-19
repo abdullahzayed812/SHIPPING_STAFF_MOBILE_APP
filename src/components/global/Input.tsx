@@ -1,13 +1,15 @@
 import { StyleSheet, TextInput, View, ViewStyle } from "react-native";
 import { COLORS } from "../../utils/colors";
 import { SPACING } from "../../utils/dimensions";
+import { Dispatch, SetStateAction } from "react";
 
 interface InputProps {
   placeholder: string;
   numeric?: boolean;
   inputContainerStyle?: ViewStyle;
-  handleChange(text: string): void;
+  handleChange(text: string): void | Dispatch<SetStateAction<string>>;
   secureTextEntry?: boolean;
+  value: string;
 }
 
 export function Input({
@@ -16,6 +18,7 @@ export function Input({
   inputContainerStyle,
   handleChange,
   secureTextEntry,
+  value,
 }: InputProps): JSX.Element {
   const KEYBOARD_TYPE = numeric ? "numeric" : undefined;
 
@@ -27,6 +30,7 @@ export function Input({
         keyboardType={KEYBOARD_TYPE}
         onChangeText={(text) => handleChange(text)}
         secureTextEntry={secureTextEntry}
+        value={value}
       />
     </View>
   );

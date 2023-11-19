@@ -1,13 +1,13 @@
+import axios from "axios";
 import { store } from "../app/store";
+import { loadToken } from "../utils/storage";
 
 const BASE_URL = "https://postagexp.com/staff/app/api/v1";
 
-function getToken() {}
-
-function getHeaders(): { [index: string]: string } {
+async function getHeaders(): Promise<{ [index: string]: string }> {
   const APP_KEY = "";
 
-  const TOKEN = getToken();
+  const TOKEN = await loadToken();
 
   return {
     "Content-type": "application/json",
@@ -20,12 +20,13 @@ export class ApiMethod {
   static async apiRequest<T>(method: string, URL: string, body?: T): Promise<void> {
     const url = BASE_URL + URL;
     try {
-      const response = await fetch(url, {
+      const response = await axios(url, {
         method,
-        body: JSON.stringify(body),
-        headers: getHeaders(),
+        data: method === "POST" ? body : null,
+        params: method === "GET" ? body : null,
+        headers: await getHeaders(),
       });
-      const data = await response.json();
+      const data = await response?.data;
       return data;
     } catch (error) {
       console.log(error);

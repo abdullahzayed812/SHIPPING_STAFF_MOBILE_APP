@@ -1,6 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { HomeScreen } from "../../screens/HomeScreen";
-import { ProfileScreen } from "../../screens/ProfileScreen";
 import { FONT_MEDIUM_BOLD } from "../../utils/fonts";
 import { TabBarIcon } from "./TabBarIcon";
 import { COLORS } from "../../utils/colors";
@@ -8,6 +7,8 @@ import { TabStackParamList } from "../types";
 import { Scanner } from "../../feature/scanner/Scanner";
 import { useAppDispatch } from "../../app/hooks";
 import { openScanner, openScannerModal } from "../../feature/scanner/scannerSlice";
+import { ProfileStackScreen } from "../stacks/ProfileStack";
+import { ScanShipmentStackScreen } from "../stacks/ScanStack";
 
 const TabStack = createBottomTabNavigator<TabStackParamList>();
 
@@ -39,7 +40,7 @@ export function TabStackScreen() {
       <TabStack.Screen name="HomeScreen" component={HomeScreen} options={{ tabBarLabel: "Home" }} />
       <TabStack.Screen
         name="ScanStackScreen"
-        component={Scanner}
+        component={ScanShipmentStackScreen}
         options={{ tabBarLabel: "" }}
         listeners={{
           tabPress: (e) => {
@@ -51,8 +52,8 @@ export function TabStackScreen() {
         }}
       />
       <TabStack.Screen
-        name="ProfileScreen"
-        component={ProfileScreen}
+        name="ProfileStackScreen"
+        component={ProfileStackScreen}
         options={{ tabBarLabel: "Profile" }}
       />
     </TabStack.Navigator>

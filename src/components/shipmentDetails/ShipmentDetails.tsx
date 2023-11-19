@@ -1,22 +1,27 @@
-import { Image, StyleSheet, Text, View } from "react-native";
-import { IMAGES } from "../../utils/images";
-import { SPACING } from "../../utils/dimensions";
-import { GLOBAL_STYLES } from "../../utils/styles";
-import { COLORS } from "../../utils/colors";
-import { FONT_MEDIUM_BOLD, FONT_MEDIUM_LIGHT_BOLD } from "../../utils/fonts";
-import { Button } from "../global/Button";
-import { ShipmentDetailsButtons } from "./ShipmentDetailsButtons";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { ShipmentInfo } from "./ShipmentInfo";
+import { ShipmentDetailsButtons } from "./ShipmentDetailsButtons";
+import { COLORS } from "../../utils/colors";
+
+export type ShipmentDetailsType = {
+  awb: string;
+  store: string;
+  receiver_name: string;
+  receiver_city: string;
+  receiver_address: string;
+  status: string;
+  delivery_attempts: number;
+  quantity: number;
+};
 
 interface ShipmentDetailsProps {
-  shipmentNumber: string;
+  detailsObject: Readonly<ShipmentDetailsType | undefined>;
 }
 
-export function ShipmentDetails({ shipmentNumber }: ShipmentDetailsProps): JSX.Element {
+export function ShipmentDetails({ detailsObject }: ShipmentDetailsProps): JSX.Element {
   return (
-    <View>
-      <ShipmentInfo shipmentNumber={shipmentNumber} />
-      {/* Expanded Section */}
+    <View style={{ backgroundColor: COLORS.WHITE }}>
+      <ShipmentInfo detailsObject={detailsObject} />
       <ShipmentDetailsButtons />
     </View>
   );
