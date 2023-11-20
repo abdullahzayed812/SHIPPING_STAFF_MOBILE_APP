@@ -3,16 +3,15 @@ import { InputsEdit } from "../components/editShipment/InputsEdit";
 import { Button } from "../components/global/Button";
 import { Container } from "../components/global/Container";
 import { Header } from "../components/global/Header";
-import { Input } from "../components/global/Input";
 import { SectionTitle } from "../components/global/SectionTitle";
 import { SPACING } from "../utils/dimensions";
-import { ShipmentStackParamList } from "../navigations/types";
 import { RouteProp } from "@react-navigation/native";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ApiManager } from "../api/apiManager";
 import { Loading } from "../components/global/Loading";
 import { Line } from "../components/global/Line";
-import { FlatList, ScrollView } from "react-native";
+import { FlatList } from "react-native";
+import { ShipmentStackScreenProps } from "../navigations/types";
 
 interface ShipmentDimensions {
   width: number;
@@ -28,8 +27,8 @@ interface ShipmentInfo {
 }
 
 interface EditShipmentScreenProps {
-  navigation: NativeStackNavigationProp<ShipmentStackParamList, "EditShipmentScreen">;
-  route: RouteProp<ShipmentStackParamList, "EditShipmentScreen">;
+  navigation: ShipmentStackScreenProps<"EditShipmentScreen">["navigation"];
+  route: ShipmentStackScreenProps<"EditShipmentScreen">["route"];
 }
 
 export function EditShipmentScreen({ navigation, route }: EditShipmentScreenProps): JSX.Element {

@@ -6,11 +6,10 @@ import { GLOBAL_STYLES } from "../utils/styles";
 import { SPACING } from "../utils/dimensions";
 import { FONT_MEDIUM_LIGHT_BOLD, FONT_X_LARGE_BOLD } from "../utils/fonts";
 import { COLORS } from "../utils/colors";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../navigations/types";
+import { RootStackScreenProps, ShipmentStackScreenProps } from "../navigations/types";
 
 interface SuccessEditScreen {
-  navigation: NativeStackNavigationProp<RootStackParamList>;
+  navigation: ShipmentStackScreenProps<"SuccessEditScreen">["navigation"];
 }
 
 export function SuccessEditScreen({ navigation }: SuccessEditScreen): JSX.Element {
@@ -21,7 +20,7 @@ export function SuccessEditScreen({ navigation }: SuccessEditScreen): JSX.Elemen
       <Text style={STYLES.text}>Products have been modified</Text>
       <Button
         text="Home Page"
-        onPress={() => navigation.navigate("TabStackScreen", { screen: "HomeScreen" })}
+        onPress={() => navigation.navigate("HomeScreen")}
         containerStyle={STYLES.button}
       />
     </View>

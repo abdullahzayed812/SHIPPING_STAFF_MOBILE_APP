@@ -5,12 +5,12 @@ import { UserInfo } from "../components/home/UserInfo";
 import { COLORS } from "../utils/colors";
 import { SPACING } from "../utils/dimensions";
 import { IMAGES } from "../utils/images";
-import { TabStackParamList } from "../navigations/types";
 import { useAppDispatch } from "../app/hooks";
 import { openScanner, openScannerModal } from "../feature/scanner/scannerSlice";
+import { RootStackScreenProps, TabStackScreenProps } from "../navigations/types";
 
 interface HomeScreenProps {
-  navigation: NativeStackNavigationProp<TabStackParamList>;
+  navigation: TabStackScreenProps<"HomeScreen">["navigation"];
 }
 
 export function HomeScreen({ navigation }: HomeScreenProps): JSX.Element {

@@ -1,8 +1,8 @@
 import { Image, StyleSheet, View } from "react-native";
-import { IMAGES } from "../../utils/images";
-import { GLOBAL_STYLES } from "../../utils/styles";
-import { COLORS } from "../../utils/colors";
-import { SPACING } from "../../utils/dimensions";
+import { IMAGES } from "../utils/images";
+import { GLOBAL_STYLES } from "../utils/styles";
+import { COLORS } from "../utils/colors";
+import { SPACING } from "../utils/dimensions";
 
 interface ScanTabProps {
   routeName: string;

@@ -3,12 +3,12 @@ import { Button } from "../components/global/Button";
 import { Container } from "../components/global/Container";
 import { Header } from "../components/global/Header";
 import { ShipmentDetails } from "../components/shipmentDetails/ShipmentDetails";
-import { ShipmentStackParamList } from "../navigations/types";
 import { RouteProp } from "@react-navigation/native";
+import { ShipmentStackScreenProps } from "../navigations/types";
 
 interface ShipmentDetailsScreenProps {
-  navigation: NativeStackNavigationProp<ShipmentStackParamList, "ShipmentDetailsScreen">;
-  route: RouteProp<ShipmentStackParamList, "ShipmentDetailsScreen">;
+  navigation: ShipmentStackScreenProps<"ShipmentDetailsScreen">["navigation"];
+  route: ShipmentStackScreenProps<"ShipmentDetailsScreen">["route"];
 }
 
 export function ShipmentDetailsScreen({

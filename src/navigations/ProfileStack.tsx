@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { ProfileStackParamList } from "../types";
-import { ProfileScreen } from "../../screens/ProfileScreen";
-import { ChangePasswordScreen } from "../../screens/ChangePasswordScreen";
-import { EditProfileScreen } from "../../screens/EditProfileScreen";
+import { ProfileScreen } from "../screens/ProfileScreen";
+import { ChangePasswordScreen } from "../screens/ChangePasswordScreen";
+import { EditProfileScreen } from "../screens/EditProfileScreen";
+import { ProfileStackParamList } from "./types";
 
 const ProfileStack = createNativeStackNavigator<ProfileStackParamList>();
 

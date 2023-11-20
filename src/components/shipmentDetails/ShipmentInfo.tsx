@@ -9,7 +9,7 @@ import { Line } from "../global/Line";
 import type { ShipmentDetailsType } from "./ShipmentDetails";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList, ShipmentStackParamList } from "../../navigations/types";
+import { RootStackParamList, ShipmentStackParamList } from "../../navigations";
 
 interface ShipmentInfoProps {
   detailsObject: Readonly<ShipmentDetailsType | undefined>;

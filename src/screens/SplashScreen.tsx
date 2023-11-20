@@ -2,14 +2,13 @@ import { Image } from "react-native";
 import { Container } from "../components/global/Container";
 import { IMAGES } from "../utils/images";
 import { useEffect } from "react";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../navigations/types";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { saveUserData, selectUserInfo } from "../feature/user/userSlice";
+import { useAppDispatch } from "../app/hooks";
+import { saveUserData } from "../feature/user/userSlice";
 import { loadToken, loadUserData } from "../utils/storage";
+import { RootStackScreenProps } from "../navigations/types";
 
 interface SplashScreenProps {
-  navigation: NativeStackNavigationProp<RootStackParamList>;
+  navigation: RootStackScreenProps<"SplashScreen">["navigation"];
 }
 
 export function SplashScreen({ navigation }: SplashScreenProps): JSX.Element {
@@ -22,7 +21,7 @@ export function SplashScreen({ navigation }: SplashScreenProps): JSX.Element {
 
       if (user?.email) {
         dispatch(saveUserData({ access_token, user }));
-        navigation.navigate("TabStackScreen", { screen: "HomeScreen" });
+        navigation.navigate("HomeScreen");
       } else {
         navigation.navigate("LoginScreen");
       }

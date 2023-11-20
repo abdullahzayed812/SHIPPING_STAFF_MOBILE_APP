@@ -1,12 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SplashScreen } from "../screens/SplashScreen";
-import { TabStackScreen } from "./tabs/TabStackScreen";
-import { RootStackParamList } from "./types";
+import { TabStackScreen } from "./TabStackScreen";
 import { LoginScreen } from "../screens/LoginScreen";
-import { ShipmentDetailsScreen } from "../screens/ShipmentDetailsScreen";
-import { EditShipmentScreen } from "../screens/EditShipments";
-import { ShipmentStackScreen } from "./stacks/ShipmentStack";
+import { ShipmentStackScreen } from "./ShipmentStack";
+import { RootStackParamList } from "./types";
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 

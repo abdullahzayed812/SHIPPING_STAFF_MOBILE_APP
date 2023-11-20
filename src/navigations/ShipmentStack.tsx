@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { ShipmentDetailsScreen } from "../../screens/ShipmentDetailsScreen";
-import { EditShipmentScreen } from "../../screens/EditShipments";
-import { ShipmentStackParamList } from "../types";
-import { SuccessEditScreen } from "../../screens/SuccessEditScreen";
+import { ShipmentDetailsScreen } from "../screens/ShipmentDetailsScreen";
+import { EditShipmentScreen } from "../screens/EditShipments";
+import { SuccessEditScreen } from "../screens/SuccessEditScreen";
+import { ShipmentStackParamList } from "./types";
 
 const ShipmentStack = createNativeStackNavigator<ShipmentStackParamList>();
 
