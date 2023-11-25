@@ -4,12 +4,14 @@ import { SPACING } from "../../utils/dimensions";
 import { Dispatch, SetStateAction } from "react";
 
 interface InputProps {
-  placeholder: string;
+  placeholder?: string;
   numeric?: boolean;
   inputContainerStyle?: ViewStyle;
   handleChange(text: string): void | Dispatch<SetStateAction<string>>;
   secureTextEntry?: boolean;
   value: string;
+  inputFieldStyle?: ViewStyle;
+  multiline?: boolean;
 }
 
 export function Input({
@@ -19,18 +21,22 @@ export function Input({
   handleChange,
   secureTextEntry,
   value,
+  inputFieldStyle,
+  multiline,
 }: InputProps): JSX.Element {
   const KEYBOARD_TYPE = numeric ? "numeric" : undefined;
 
   return (
     <View style={[STYLES.container, inputContainerStyle]}>
       <TextInput
-        style={STYLES.input}
+        style={[STYLES.input, inputFieldStyle]}
         placeholder={placeholder}
         keyboardType={KEYBOARD_TYPE}
         onChangeText={(text) => handleChange(text)}
         secureTextEntry={secureTextEntry}
         value={value}
+        multiline={multiline}
+        placeholderTextColor={COLORS.BLACK}
       />
     </View>
   );
@@ -43,5 +49,7 @@ const STYLES = StyleSheet.create({
     borderRadius: SPACING.SMALL / 2,
     paddingHorizontal: SPACING.SMALL / 2,
   },
-  input: {},
+  input: {
+    color: COLORS.BLACK,
+  },
 });

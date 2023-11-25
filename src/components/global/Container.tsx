@@ -2,7 +2,6 @@ import React, { PropsWithChildren } from "react";
 import { View } from "react-native";
 import { COLORS } from "../../utils/colors";
 import { GLOBAL_STYLES } from "../../utils/styles";
-import { IMAGES } from "../../utils/images";
 import { SPACING } from "../../utils/dimensions";
 
 interface Props extends PropsWithChildren {

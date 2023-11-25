@@ -7,18 +7,17 @@ import { useState } from "react";
 import {
   VALID_EMAIL,
   VALID_PASSWORD,
-  displayError,
   isInputsFilled,
   isValidInputValue,
 } from "../../utils/validation";
 import { useAppDispatch } from "../../app/hooks";
-import { NotificationModal } from "../../feature/notification/NotificationModal";
 import { ApiManager } from "../../api/apiManager";
 import { Loading } from "../global/Loading";
 import { saveUserData } from "../../feature/user/userSlice";
 import { useNavigation } from "@react-navigation/native";
 import { storeUserData } from "../../utils/storage";
 import { RootStackScreenProps } from "../../navigations/types";
+import { showNotificationModal } from "../../feature/notification/notificationSlice";
 
 interface FormInputType {
   email: string;
@@ -33,7 +32,6 @@ export function LoginForm(): JSX.Element {
     email: "",
     password: "",
   });
-  const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
   const { email, password } = formInputs;
@@ -44,13 +42,13 @@ export function LoginForm(): JSX.Element {
 
   const handleLogin = async () => {
     if (!isInputsFilled({ email, password })) {
-      displayError(setError, "Inputs must be filled!");
+      dispatch(showNotificationModal("Inputs must be filled!"));
       return;
     } else if (!isValidInputValue(email, VALID_EMAIL)) {
-      displayError(setError, "Invalid Email!");
+      dispatch(showNotificationModal("Invalid Email!"));
       return;
     } else if (!isValidInputValue(password, VALID_PASSWORD)) {
-      displayError(setError, "At least one upper, lower and digit");
+      dispatch(showNotificationModal("At least one upper, lower and digit"));
       return;
     }
 
@@ -64,7 +62,7 @@ export function LoginForm(): JSX.Element {
         dispatch(saveUserData({ access_token, user }));
         navigation.navigate("HomeScreen");
       } else {
-        displayError(setError, "User not found.");
+        dispatch(showNotificationModal("User not found."));
       }
     } catch (error) {
       console.log(error);
@@ -95,7 +93,6 @@ export function LoginForm(): JSX.Element {
         color={COLORS.WHITE}
       />
       {loading ? <Loading /> : null}
-      {error ? <NotificationModal message={error} /> : null}
     </View>
   );
 }

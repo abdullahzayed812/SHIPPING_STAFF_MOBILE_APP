@@ -3,12 +3,11 @@ import { HomeScreen } from "../screens/HomeScreen";
 import { FONT_MEDIUM_BOLD } from "../utils/fonts";
 import { TabBarIcon } from "./TabBarIcon";
 import { COLORS } from "../utils/colors";
-import { TabStackParamList } from "../types";
-import { Scanner } from "../feature/scanner/Scanner";
 import { useAppDispatch } from "../app/hooks";
 import { openScanner, openScannerModal } from "../feature/scanner/scannerSlice";
-import { ProfileStackScreen } from "../stacks/ProfileStack";
-import { ScanShipmentStackScreen } from "../stacks/ScanStack";
+import { TabStackParamList } from "./types";
+import { ScanShipmentStackScreen } from "./ScanStack";
+import { ProfileStackScreen } from "./ProfileStack";
 
 const TabStack = createBottomTabNavigator<TabStackParamList>();
 

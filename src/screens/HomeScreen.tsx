@@ -1,4 +1,3 @@
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Container } from "../components/global/Container";
 import { ScanBox } from "../components/home/ScanBox";
 import { UserInfo } from "../components/home/UserInfo";
@@ -7,7 +6,7 @@ import { SPACING } from "../utils/dimensions";
 import { IMAGES } from "../utils/images";
 import { useAppDispatch } from "../app/hooks";
 import { openScanner, openScannerModal } from "../feature/scanner/scannerSlice";
-import { RootStackScreenProps, TabStackScreenProps } from "../navigations/types";
+import { TabStackScreenProps } from "../navigations/types";
 
 interface HomeScreenProps {
   navigation: TabStackScreenProps<"HomeScreen">["navigation"];

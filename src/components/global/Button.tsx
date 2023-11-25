@@ -9,7 +9,7 @@ interface ButtonProps {
   onPress: () => void;
   containerStyle?: ViewStyle;
   color?: ColorValue;
-  fontSize?: number;
+  textAlign?: "center" | "right" | "left";
 }
 
 export function Button({
@@ -17,11 +17,11 @@ export function Button({
   onPress,
   containerStyle,
   color,
-  fontSize,
+  textAlign,
 }: ButtonProps): JSX.Element {
   return (
     <TouchableOpacity style={[STYLES.container, containerStyle]} onPress={onPress}>
-      <Text style={[STYLES.text, { color }]}>{text}</Text>
+      <Text style={[STYLES.text, { color, textAlign }]}>{text}</Text>
     </TouchableOpacity>
   );
 }

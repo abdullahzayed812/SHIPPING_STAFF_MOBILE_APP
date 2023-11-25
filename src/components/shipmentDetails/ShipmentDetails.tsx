@@ -12,6 +12,8 @@ export type ShipmentDetailsType = {
   status: string;
   delivery_attempts: number;
   quantity: number;
+  service_id: number;
+  from?: string;
 };
 
 interface ShipmentDetailsProps {
@@ -22,7 +24,7 @@ export function ShipmentDetails({ detailsObject }: ShipmentDetailsProps): JSX.El
   return (
     <View style={{ backgroundColor: COLORS.WHITE }}>
       <ShipmentInfo detailsObject={detailsObject} />
-      <ShipmentDetailsButtons />
+      <ShipmentDetailsButtons awb={detailsObject?.awb} serviceId={detailsObject?.service_id} />
     </View>
   );
 }

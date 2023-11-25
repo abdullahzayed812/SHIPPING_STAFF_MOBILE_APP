@@ -3,19 +3,46 @@ import { Button } from "../global/Button";
 import { GLOBAL_STYLES } from "../../utils/styles";
 import { SPACING } from "../../utils/dimensions";
 import { COLORS } from "../../utils/colors";
+import { useNavigation } from "@react-navigation/native";
+import { ShipmentStackScreenProps } from "../../navigations/types";
+import { useAppDispatch } from "../../app/hooks";
+import { showNotificationModal } from "../../feature/notification/notificationSlice";
 
-export function ShipmentDetailsButtons(): JSX.Element {
+interface ShipmentDetailsButtonsProps {
+  awb: string | undefined;
+  serviceId: number | undefined;
+}
+
+export function ShipmentDetailsButtons({
+  awb,
+  serviceId,
+}: ShipmentDetailsButtonsProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const navigation =
+    useNavigation<ShipmentStackScreenProps<"ShipmentDetailsScreen">["navigation"]>();
+
+  const handleAppendToDrs = () => {
+    navigation.navigate("AppendToDrsScreen", { awb });
+
+    // if (serviceId === 6) {
+    //   dispatch(showNotificationModal("Blocked...!"));
+    // } else {
+    //   navigation.navigate("AppendToDrsScreen", { awb });
+    // }
+  };
+
   return (
     <View style={STYLES.container}>
       <Button
         text="Append To DRS"
-        onPress={() => {}}
+        onPress={handleAppendToDrs}
         containerStyle={STYLES.buttonStyle1}
         color={COLORS.WHITE}
       />
       <Button
         text="Update Status"
-        onPress={() => {}}
+        onPress={() => navigation.navigate("UpdateShipmentStatusScreen", { awb })}
         containerStyle={STYLES.buttonStyle2}
         color={COLORS.WHITE}
       />

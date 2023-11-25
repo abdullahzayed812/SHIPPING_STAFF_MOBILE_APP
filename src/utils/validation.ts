@@ -17,5 +17,5 @@ export const isValidInputValue = (inputValue: string, pattern: RegExp) => {
 
 export const displayError = (setError: Dispatch<SetStateAction<string>>, message: string): void => {
   setError(message);
-  store.dispatch(showNotificationModal());
+  store.dispatch(showNotificationModal(message));
 };

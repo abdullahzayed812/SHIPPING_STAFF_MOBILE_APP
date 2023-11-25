@@ -8,11 +8,11 @@ import { ApiManager } from "../api/apiManager";
 import { Loading } from "../components/global/Loading";
 import { showNotificationModal } from "../feature/notification/notificationSlice";
 import { useAppDispatch } from "../app/hooks";
-import { NotificationModal } from "../feature/notification/NotificationModal";
-import { ScanStackScreenProps } from "../navigations/types";
+import { RootStackParamList } from "../navigations/types";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 interface ScanShipmentScreenProps {
-  navigation: ScanStackScreenProps<"ScanShipmentScreen">["navigation"];
+  navigation: NativeStackNavigationProp<RootStackParamList>;
 }
 
 export function ScanShipmentScreen({ navigation }: ScanShipmentScreenProps): JSX.Element {
@@ -30,10 +30,13 @@ export function ScanShipmentScreen({ navigation }: ScanShipmentScreenProps): JSX
 
         if (res?.data?.awb) {
           setAWB("");
-          navigation.navigate("ShipmentDetailsScreen", res?.data);
+          navigation.navigate("ShipmentStackScreen", {
+            screen: "ShipmentDetailsScreen",
+            params: res?.data,
+          });
         }
       } else {
-        dispatch(showNotificationModal());
+        dispatch(showNotificationModal("Invalid AWB."));
       }
     } catch (error) {
       console.log(error);
@@ -44,14 +47,13 @@ export function ScanShipmentScreen({ navigation }: ScanShipmentScreenProps): JSX
 
   return (
     <>
-      <Header text="Scan Shipment" />
+      <Header text="Scan Shipment" navigateToHomeScreen />
       <Container>
         <ShipmentNumberInput inputValue={AWB} setInputValue={setAWB} />
         <Button text="Scan" onPress={handleScanPress} />
         <ImageBox />
       </Container>
       {loading ? <Loading /> : null}
-      <NotificationModal message="Invalid AWB." />
     </>
   );
 }

@@ -5,10 +5,11 @@ import { useEffect } from "react";
 import { useAppDispatch } from "../app/hooks";
 import { saveUserData } from "../feature/user/userSlice";
 import { loadToken, loadUserData } from "../utils/storage";
-import { RootStackScreenProps } from "../navigations/types";
+import { RootStackParamList } from "../navigations/types";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 interface SplashScreenProps {
-  navigation: RootStackScreenProps<"SplashScreen">["navigation"];
+  navigation: NativeStackNavigationProp<RootStackParamList>;
 }
 
 export function SplashScreen({ navigation }: SplashScreenProps): JSX.Element {
@@ -21,7 +22,8 @@ export function SplashScreen({ navigation }: SplashScreenProps): JSX.Element {
 
       if (user?.email) {
         dispatch(saveUserData({ access_token, user }));
-        navigation.navigate("HomeScreen");
+        // navigation.navigate("TabStackScreen", { screen: "HomeScreen" });
+        navigation.reset({ routes: [{ name: "TabStackScreen" }] });
       } else {
         navigation.navigate("LoginScreen");
       }

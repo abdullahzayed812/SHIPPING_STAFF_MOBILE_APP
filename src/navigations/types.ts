@@ -1,7 +1,6 @@
 import { CompositeScreenProps, NavigatorScreenParams } from "@react-navigation/native";
 import { ShipmentDetailsType } from "../components/shipmentDetails/ShipmentDetails";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { BottomTabBarButtonProps, BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 
 export type ScanStackParamList = {
   ScannerScreen: undefined;
@@ -30,7 +29,7 @@ export type TabStackParamList = {
   ProfileStackScreen: NavigatorScreenParams<ProfileStackParamList>;
 };
 
-export type TabStackScreenProps<T extends keyof TabStackParamList> = BottomTabScreenProps<
+export type TabStackScreenProps<T extends keyof TabStackParamList> = NativeStackScreenProps<
   TabStackParamList,
   T
 >;
@@ -39,6 +38,8 @@ export type ShipmentStackParamList = {
   ShipmentDetailsScreen: ShipmentDetailsType;
   EditShipmentScreen: { awb: string };
   SuccessEditScreen: undefined;
+  AppendToDrsScreen: { awb: string | undefined };
+  UpdateShipmentStatusScreen: { awb: string | undefined };
 };
 
 export type ShipmentStackScreenProps<T extends keyof ShipmentStackParamList> = CompositeScreenProps<
@@ -49,7 +50,7 @@ export type ShipmentStackScreenProps<T extends keyof ShipmentStackParamList> = C
 export type RootStackParamList = {
   SplashScreen: undefined;
   LoginScreen: undefined;
-  TabStackScreen: BottomTabScreenProps<TabStackParamList>;
+  TabStackScreen: NavigatorScreenParams<TabStackParamList>;
   ShipmentStackScreen: NavigatorScreenParams<ShipmentStackParamList>;
 };
 

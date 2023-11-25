@@ -11,6 +11,7 @@ import { COLORS } from "./src/utils/colors";
 import { Provider } from "react-redux";
 import { store } from "./src/app/store";
 import { RootStackScreen } from "./src/navigations";
+import { NotificationModal } from "./src/feature/notification/NotificationModal";
 
 function App(): JSX.Element {
   return (
@@ -18,6 +19,7 @@ function App(): JSX.Element {
       <StatusBar backgroundColor={COLORS.MAIN} />
       <Provider store={store}>
         <RootStackScreen />
+        <NotificationModal />
       </Provider>
     </SafeAreaView>
   );

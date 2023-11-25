@@ -2,27 +2,31 @@ import { Modal, StyleSheet, Text, View } from "react-native";
 import { FONT_MEDIUM_LIGHT_BOLD } from "../../utils/fonts";
 import { COLORS } from "../../utils/colors";
 import { SPACING } from "../../utils/dimensions";
+import { GLOBAL_STYLES } from "../../utils/styles";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { hideNotificationModal, selectIsActiveNotificationModal } from "./notificationSlice";
+import {
+  hideNotificationModal,
+  selectErrorMessage,
+  selectIsActiveNotificationModal,
+} from "./notificationSlice";
 import { useEffect } from "react";
 
-interface NotificationModalProps {
-  message: string;
-}
-
-export function NotificationModal({ message }: NotificationModalProps): JSX.Element {
+export function NotificationModal(): JSX.Element {
   const dispatch = useAppDispatch();
+
+  const errorMessage = useAppSelector(selectErrorMessage);
   const isActive = useAppSelector(selectIsActiveNotificationModal);
 
   useEffect(() => {
-    const timerId = setTimeout(() => dispatch(hideNotificationModal()), 1500);
+    const timerId = setTimeout(() => dispatch(hideNotificationModal()), 2500);
     return () => clearTimeout(timerId);
   });
 
   return (
     <Modal visible={isActive} transparent animationType="slide">
       <View style={STYLES.container}>
-        <Text style={STYLES.message}>{message}</Text>
+        <Text style={STYLES.errorMessage}>{errorMessage}</Text>
+        <Text style={{ fontSize: 30 }}>🙋</Text>
       </View>
     </Modal>
   );
@@ -30,14 +34,21 @@ export function NotificationModal({ message }: NotificationModalProps): JSX.Elem
 
 const STYLES = StyleSheet.create({
   container: {
+    ...GLOBAL_STYLES.SPACE_BETWEEN,
     width: "95%",
     alignSelf: "center",
     position: "absolute",
     bottom: 20,
     borderRadius: SPACING.SMALL / 2,
     padding: SPACING.SMALL / 2,
-    backgroundColor: COLORS.RED,
+    backgroundColor: COLORS.MAIN,
     elevation: 10,
   },
-  message: { ...FONT_MEDIUM_LIGHT_BOLD, color: COLORS.WHITE },
+  errorMessage: {
+    flex: 1,
+    ...FONT_MEDIUM_LIGHT_BOLD,
+    color: COLORS.WHITE,
+    padding: SPACING.SMALL,
+    fontSize: 22,
+  },
 });
