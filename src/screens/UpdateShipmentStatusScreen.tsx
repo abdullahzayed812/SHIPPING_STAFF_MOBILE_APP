@@ -44,16 +44,18 @@ export function UpdateShipmentStatusScreen({
   const { awb } = route.params;
 
   const handleUpdate = async () => {
+    // console.log({ selectedStatus, comment });
+
+    if (!selectedStatus) {
+      dispatch(showNotificationModal("Status is requires."));
+      return;
+    } else if (!comment) {
+      dispatch(showNotificationModal("Comment is required."));
+      return;
+    }
+
     try {
       setLoading(true);
-
-      if (!selectedStatus) {
-        dispatch(showNotificationModal("Status is requires."));
-        return;
-      } else if (!comment) {
-        dispatch(showNotificationModal("Comment is required."));
-        return;
-      }
 
       const res = await ApiManager.updateShipmentStatus({
         status_id: +selectedStatus,
@@ -64,7 +66,7 @@ export function UpdateShipmentStatusScreen({
       if (res?.message === "Update Shipments Successfully") {
         navigation.navigate("SuccessEditScreen");
       } else {
-        dispatch(showNotificationModal(res?.message));
+        dispatch(showNotificationModal("Can't update shipment for this status."));
       }
     } catch (error) {
       console.log(error);
@@ -85,6 +87,7 @@ export function UpdateShipmentStatusScreen({
             list={DATA}
             onSelect={setSelectedStatus}
             marginTop={SPACING.SMALL}
+            updateStatus
           />
           <SectionTitle text="Comment" />
           <Input

@@ -16,8 +16,9 @@ import { Loading } from "../global/Loading";
 import { saveUserData } from "../../feature/user/userSlice";
 import { useNavigation } from "@react-navigation/native";
 import { storeUserData } from "../../utils/storage";
-import { RootStackScreenProps } from "../../navigations/types";
+import { RootStackParamList, RootStackScreenProps } from "../../navigations/types";
 import { showNotificationModal } from "../../feature/notification/notificationSlice";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 interface FormInputType {
   email: string;
@@ -26,7 +27,7 @@ interface FormInputType {
 
 export function LoginForm(): JSX.Element {
   const dispatch = useAppDispatch();
-  const navigation = useNavigation<RootStackScreenProps<"LoginScreen">["navigation"]>();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const [formInputs, setFormInputs] = useState<FormInputType>({
     email: "",
@@ -60,7 +61,7 @@ export function LoginForm(): JSX.Element {
       if (user?.id) {
         await storeUserData(access_token, user);
         dispatch(saveUserData({ access_token, user }));
-        navigation.navigate("HomeScreen");
+        navigation.navigate("TabStackScreen", { screen: "HomeScreen" });
       } else {
         dispatch(showNotificationModal("User not found."));
       }

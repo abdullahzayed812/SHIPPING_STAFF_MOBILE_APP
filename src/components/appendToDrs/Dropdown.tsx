@@ -9,6 +9,7 @@ interface DropdownComponentProps {
   list: { [index: string]: string }[];
   onSelect: Dispatch<SetStateAction<string>>;
   marginTop?: number;
+  updateStatus?: boolean;
 }
 
 export function DropdownComponent({
@@ -17,6 +18,7 @@ export function DropdownComponent({
   list,
   marginTop,
   onSelect,
+  updateStatus,
 }: DropdownComponentProps) {
   const [value, setValue] = useState("");
   const [isFocus, setIsFocus] = useState(false);
@@ -31,7 +33,7 @@ export function DropdownComponent({
   const handleChange = (item: { [index: string]: string }) => {
     setValue(item.value);
     setIsFocus(false);
-    onSelect(item.value);
+    updateStatus ? onSelect(item.value) : onSelect(item.id);
   };
 
   return (

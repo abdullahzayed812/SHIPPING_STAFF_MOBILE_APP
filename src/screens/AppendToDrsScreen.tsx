@@ -86,7 +86,6 @@ export function AppendToDrsScreen({ route, navigation }: AppendToDrsScreenProps)
         setLoading(true);
 
         const res = await ApiManager.getDrsNames(+selectedDriverId);
-        console.log(res);
 
         if (res?.data?.length > 0) {
           setDRSList(res?.data);
@@ -100,22 +99,22 @@ export function AppendToDrsScreen({ route, navigation }: AppendToDrsScreenProps)
   }, [selectedDriverId]);
 
   const handleUpdate = async () => {
+    if (!selectedStatusId) {
+      dispatch(showNotificationModal("Status is required."));
+      return;
+    } else if (!selectedRouteId) {
+      dispatch(showNotificationModal("Route name is required."));
+      return;
+    } else if (!selectedDriverId) {
+      dispatch(showNotificationModal("Driver name is required."));
+      return;
+    } else if (!selectedDRSId) {
+      dispatch(showNotificationModal("DRS barcode is required."));
+      return;
+    }
+
     try {
       setLoading(true);
-
-      if (!selectedStatusId) {
-        dispatch(showNotificationModal("Status is required."));
-        return;
-      } else if (!selectedRouteId) {
-        dispatch(showNotificationModal("Route name is required."));
-        return;
-      } else if (!selectedDriverId) {
-        dispatch(showNotificationModal("Driver name is required."));
-        return;
-      } else if (!selectedDRSId) {
-        dispatch(showNotificationModal("DRS barcode is required."));
-        return;
-      }
 
       const res = await ApiManager.appendShipmentToDRS({
         messenger_id: +selectedDriverId,
